@@ -1,0 +1,21 @@
+body,ul,h3{margin:0;padding:0;}
+
+#box1{
+	width:102px;
+}
+#ul1{
+	width:100px;
+	border:1px solid #000;
+}
+li{
+	list-style: none;
+	line-height:30px;
+	text-align: center;
+}
+#box2{
+	position: fixed;
+	right:0;
+	top:50px;
+	border: 1px solid #000;
+	padding: 20px;
+}
