@@ -3,8 +3,23 @@ var list2 = document.getElementById("list2");
 var lis = list1.children;
 var arr = [];
 var oS = '';
-
+//一打开页面的时候就获取localstorage，并且渲染到页面，这样保证localStorage中的内容能渲染到页面中
 oS = window.localStorage.getItem('list');
+if(oS){
+	var aS = oS.split(',');
+	arr = aS;
+	showList(aS);
+}
+window.addEventListener('storage',function(){
+	if(oS){
+		var aS = oS.split(',');
+		arr = aS;
+		showList(aS);
+	}else{
+		arr.length = 0;
+		ul2.innerHTML = '';
+	}
+})
 for (var i = 0; i < lis.length; i++) {
 	lis[i].onclick = function(){
 		var value = this.innerHTML;//当前点击的内容
@@ -16,22 +31,16 @@ for (var i = 0; i < lis.length; i++) {
 };
 //选中删除
 list2.onclick = function(ev){
-	//如果点到了已选商品的li
-	if(ev.target.tagName == 'LI'){
-		//先拿到要删除的内容
+	if(ev.target.tagName=="LI"){
 		var removeValue = ev.target.innerHTML;
-		//数组筛选
-		for(var i=0;i<arr.length;i++){
+		for (var i = 0; i < arr.length; i++) {
 			if(arr[i] == removeValue){
 				arr.splice(i,1);
 				i--;
 			}
 		}
-		//渲染页面
-		showList(arr);
-		//将新的数组给localStorage
+		showList(arr);//渲染到页面
 		window.localStorage.setItem('list',arr);
-		console.log(arr)
 	}
 }
 //渲染页面
